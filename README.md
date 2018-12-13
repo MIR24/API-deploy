@@ -1,51 +1,52 @@
 # API-deploy
 
-#Инструкция по развертованию api-SmartTV
+#Deployment Instructions api-SmartTV
 
 #Requirements
 
-Для работы приложения  необходимо php >=7.1.3, **глобальная** установка *composer* ( см. https://getcomposer.org/doc/00-intro.md)
-**глабально** установленый   *deployer* >=6.3 ( см.  https://deployer.org/download)
+For the application to work php >=7.1.3, **global** installed *composer* ( см. https://getcomposer.org/doc/00-intro.md)
+**global** installed   *deployer* >=6.3 ( см.  https://deployer.org/download)
 
 
 #Start
 
-Копируем репозиторий (убидитесь что в github есть ключ ssh на текущего пользователя):
+Copy the repository (make sure that in github there is an ssh key for the current user):
 
 >git clone git@github.com:MIR24/API-deploy.git
 
-Создаем конфигурацию для деплоя:
+Create a configuration for deployment:
 
 > cp hosts.yml.example  hosts.yml
 
-В файле *hosts.yml* меняем 
-1. **deploy_path:** (полный путь до директории где будет лежать проект)
-2. **http_user:**  (пользователь каторый будет иметь права к файлам проекта , обычно это **www-data** для сервера)
+In the file *hosts.yml* we change:
+1. **deploy_path:** (full path to the directory where the project will be located)
+2. **http_user:** (user who has rights to the project files, usually it is **www-data** for the server)
 
 Содаем базу данных если нет .
 > mysql -u root -p
 > CREATE DATABASE database_name;
 
-Создаем конфигурацию для Laravel проекта
+Create a configuration for a Laravel project.
 
 > cp .env.example .env
 
-В файде *env* меняем:
+In file *.env* we change:
 
-1. **APP_URL** ( устанавливаем урл стенда) -- не обязательно
-2. **APP_HTTP_SCHEME** ( http -- если не подключен ssl , https -- если подключен ssl )
-3. **DB_DATABASE** , **DB_USERNAME** , **DB_PASSWORD** ( соответствующие настройки базы данных mysql)
+1. **APP_URL** (set the stand url) - not necessarily
+2. **APP_HTTP_SCHEME** (http - if ssl is not connected, https - if ssl is connected)
+3. **DB_DATABASE** , **DB_USERNAME** , **DB_PASSWORD** (corresponding mysql database settings)
 
 
 #Routine
 
-Запускаем деплой
+We start deploy
 
 >dep deploy --branch=develop
 
-Последняя версия приложения будет лежать в {{deploy_path}}/current
+The latest version of the app will be in {{deploy_path}}/current
 
-Для сервера *root* {{deploy_path}}/current/public
+For server *root* {{deploy_path}}/current/public
 
-Для ленивых админов смена прав на группу www-data (**Надо sudo** )
+For lazy admins change the rights to the group www-data (**Надо sudo** )
+
 >dep user:permission
