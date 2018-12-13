@@ -1,0 +1,9 @@
+localhost:
+ local: true
+ deploy_path: /home/user/Bostill/test
+ repository: git@github.com:MIR24/API.git
+ branch: develop
+ http_user: user
+ keep_releases: 2
+ shared_files:
+  - .env
