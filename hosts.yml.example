@@ -7,3 +7,4 @@ localhost:
  keep_releases: 2
  shared_files:
   - .env
+ default_timeout: 1200
