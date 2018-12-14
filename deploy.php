@@ -5,6 +5,12 @@ require 'recipe/common.php';
 
 inventory('hosts.yml');
 
+$releaseDate = date('Y_m_d_H_i');
+
+set('release_name', function () use ($releaseDate) {
+    return $releaseDate;
+});
+
 // [Optional] Allocate tty for git clone. Default value is false.
 set('git_tty', true);
 
@@ -17,13 +23,13 @@ task('env:config',function (){
  run('cp ./.env  {{deploy_path}}/shared/.env');
 });
 
-task('composer:update',function (){
-run('cd  {{deploy_path}}/release && composer update');
-
+task('composer:install', function () {
+    run('cd  {{deploy_path}}/release && composer install');
 });
 
-task('artisan:migration:seed',function (){
-run('cd  {{deploy_path}}/release && php artisan migrate --seed');
+task('artisan:migrate', function () {
+//    run('cd  {{deploy_path}}/release && php artisan migrate --seed');
+    run('cd  {{deploy_path}}/release && php artisan migrate');
 });
 
 task('user:permission',function (){
@@ -42,9 +48,9 @@ task('deploy', [
     'deploy:update_code',
     'deploy:shared',
     'deploy:writable',
-    'composer:update',
+    'composer:install',
     'env:config',
-    'artisan:migration:seed',
+    'artisan:migrate',
     'deploy:vendors',
     'deploy:clear_paths',
     'deploy:symlink',
