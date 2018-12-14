@@ -45,6 +45,12 @@ We start deploy
 
 The latest version of the app will be in {{deploy_path}}/current
 
+To start application in local development environment change directory to current release, then run dev server:
+```
+$ cd current
+$ php artisan serve
+```
+
 For server *root* {{deploy_path}}/current/public
 
 For lazy admins change the rights to the group www-data (**Надо sudo** )
