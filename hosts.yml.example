@@ -1,20 +1,27 @@
-test-smarttv-api:
+.test-smarttv-api: &test-base
     local: true
     stage: test
     env_example_file: .env
-    deploy_path: /home/observat/work_git/mir24/api-deployer
     repository: git@github.com:MIR24/API.git
     branch: develop
-    user: observat
     http_user: observat
     keep_releases: 2
     default_timeout: 1200
     composer_action: install
-    writable_mode: chown
-    writable_use_sudo: true
-    writable_dirs: [storage,]
-    shared_dirs: [storage/logs, public/uploaded]
+    writable_mode: chmod
+    writable_chmod_mode: 777
+    writable_dirs: ['storage', 'storage/logs', 'storage/api-docs']
+    shared_dirs: [public/uploaded]
     shared_files: []
+
+test-smarttv-api-fpm:
+    <<: *test-base
+    deploy_path: /home/observat/work_git/mir24/api-deployer-fpm
+
+test-smarttv-api-artisan:
+    <<: *test-base
+    deploy_path: /home/observat/work_git/mir24/api-deployer-artisan
+
 
 #prod-smarttv-api:
 #    local: true
