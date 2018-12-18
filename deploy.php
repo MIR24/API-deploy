@@ -1,11 +1,15 @@
 <?php
+
 namespace Deployer;
 
 require 'recipe/common.php';
+require 'recipe/smarttv_api/config.php';
+require 'recipe/smarttv_api/db.php';
+require 'recipe/smarttv_api/laravel.php';
 
 inventory('hosts.yml');
 
-$releaseDate = date('Y_m_d_H_i');
+$releaseDate = date('Y_m_d_H_i_s');
 
 set('release_name', function () use ($releaseDate) {
     return $releaseDate;
@@ -13,29 +17,6 @@ set('release_name', function () use ($releaseDate) {
 
 // [Optional] Allocate tty for git clone. Default value is false.
 set('git_tty', true);
-
-
-// Writable dirs by web server
-set('writable_dirs', []);
-
-
-task('env:config',function (){
- run('cp ./.env  {{deploy_path}}/shared/.env');
-});
-
-task('composer:install', function () {
-    run('cd  {{deploy_path}}/release && composer install');
-});
-
-task('artisan:migrate', function () {
-//    run('cd  {{deploy_path}}/release && php artisan migrate --seed');
-    run('cd  {{deploy_path}}/release && php artisan migrate');
-});
-
-task('user:permission',function (){
-    run('cd {{deploy_path}} && chown -R {{http_user}} current/');
-});
-
 
 
 // Tasks
@@ -48,11 +29,11 @@ task('deploy', [
     'deploy:update_code',
     'deploy:shared',
     'deploy:writable',
-    'composer:install',
-    'env:config',
-    'artisan:migrate',
     'deploy:vendors',
-    'deploy:clear_paths',
+    'smarttv_api:config',
+    'smarttv_api:laravel',
+// TODO    'smarttv_api:db',
+    'deploy:vendors',
     'deploy:symlink',
     'deploy:unlock',
     'cleanup',
@@ -61,4 +42,3 @@ task('deploy', [
 
 // [Optional] If deploy fails automatically unlock.
 after('deploy:failed', 'deploy:unlock');
-
