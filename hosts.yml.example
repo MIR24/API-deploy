@@ -13,6 +13,10 @@
     writable_dirs: ['storage', 'storage/logs', 'storage/api-docs']
     shared_dirs: [public/uploaded]
     shared_files: []
+    #passport
+    username: mirmobile
+    email: test@test.com
+    pass: 96570fd6a97dc9eaff5e6d751edc8906
 
 test-smarttv-api-fpm:
     <<: *test-base
