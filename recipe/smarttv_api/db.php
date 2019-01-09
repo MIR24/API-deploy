@@ -10,6 +10,16 @@ task('smarttv_api:db', [
 // TODO? 'artisan:migrate',
 ]);
 
+task('smarttv_api:db:migrate',[
+    'artisan:migrate'
+]);
+
+task('artisan:migrate',function (){
+    $output = run('cd {{release_path}} && {{bin/php}} artisan migrate');
+    writeln('<info>' . $output . '</info>');
+});
+
+
 //desc('Executing initial dump may took a minute');
 //task('db:init', function () {
 //    writeln('<info>Check if {{dump_file}} exists</info>');

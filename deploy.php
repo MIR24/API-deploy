@@ -6,6 +6,7 @@ require 'recipe/common.php';
 require 'recipe/smarttv_api/config.php';
 require 'recipe/smarttv_api/db.php';
 require 'recipe/smarttv_api/laravel.php';
+require 'recipe/smarttv_api/passport.php';
 
 inventory('hosts.yml');
 
@@ -31,6 +32,8 @@ task('deploy', [
     'deploy:vendors',
     'smarttv_api:config',
 //    'smarttv_api:laravel',
+    'smarttv_api:db:migrate',
+//    'api:passport',
 // TODO    'smarttv_api:db',
     'deploy:writable',
     'deploy:symlink',
