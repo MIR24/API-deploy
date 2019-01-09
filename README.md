@@ -21,6 +21,9 @@ Create a configuration for deployment:
 In the file *hosts.yml* we change:
 1. **deploy_path:** (full path to the directory where the project will be located)
 2. **http_user:** (user who has rights to the project files, usually it is **www-data** for the server)
+3. **username** (username for to get token. It is Mobile Api )
+4. **pass** ( password for get token. It is  Mobile Api )
+5. **email** ( It is  Mobile Api, now not use but need to be unique )
 
 Содаем базу данных если нет .
 > mysql -u root -p
@@ -34,14 +37,15 @@ In file *.env* we change:
 
 1. **APP_URL** (set the stand url) - not necessarily
 2. **APP_HTTP_SCHEME** (http - if ssl is not connected, https - if ssl is connected)
-3. **DB_DATABASE** , **DB_USERNAME** , **DB_PASSWORD** (corresponding mysql database settings)
+3. **DB_DATABASE** , **DB_USERNAME** , **DB_PASSWORD** (corresponding mysql database settings for api database)
+4. **DB_MIR24_DATABASE** , **DB_MIR24_USERNAME** , **DB_MIR24_PASSWORD** (corresponding mysql database settings for mir24 database)
 
 
 #Routine
 
 We start deploy
 
->dep deploy --branch=develop
+>dep deploy test 
 
 The latest version of the app will be in {{deploy_path}}/current
 
@@ -50,6 +54,13 @@ To start application in local development environment change directory to curren
 $ cd current
 $ php artisan serve
 ```
+
+If it is first deploy you need init passport setting
+
+```
+ dep artisan:passport:key test
+```
+
 
 For server *root* {{deploy_path}}/current/public
 

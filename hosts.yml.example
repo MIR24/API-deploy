@@ -18,9 +18,9 @@
     email: test@test.com
     pass: 96570fd6a97dc9eaff5e6d751edc8906
 
-test-smarttv-api-fpm:
-    <<: *test-base
-    deploy_path: /home/observat/work_git/mir24/api-deployer-fpm
+#test-smarttv-api-fpm:
+#    <<: *test-base
+#    deploy_path: /home/observat/work_git/mir24/api-deployer-fpm
 
 test-smarttv-api-artisan:
     <<: *test-base
