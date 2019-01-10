@@ -3,7 +3,7 @@
     stage: test
     env_example_file: .env
     repository: git@github.com:MIR24/API.git
-    branch: develop
+    branch: master
     http_user: observat
     keep_releases: 2
     default_timeout: 1200
