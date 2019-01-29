@@ -44,8 +44,14 @@ In file *.env* we change:
 #Routine
 
 We start deploy
+```
+dep deploy test 
+```
+Don`t remember restart fpm
 
->dep deploy test 
+```
+sudo service php7.2-fpm restart
+```
 
 The latest version of the app will be in {{deploy_path}}/current
 
