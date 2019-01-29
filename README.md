@@ -5,7 +5,7 @@
 #Requirements
 
 For the application to work php >=7.1.3, **global** installed *composer* ( см. https://getcomposer.org/doc/00-intro.md)
-**global** installed   *deployer* >=6.3 ( см.  https://deployer.org/download)
+**global** installed   *deployer* >=6.3 ( см.  https://deployer.org/download), memcached
 
 
 #Start
@@ -58,7 +58,7 @@ $ php artisan serve
 If it is first deploy you need init passport setting
 
 ```
- dep artisan:passport:key test
+ dep api:passport test
 ```
 
 
@@ -67,3 +67,25 @@ For server *root* {{deploy_path}}/current/public
 For lazy admins change the rights to the group www-data (**Надо sudo** )
 
 >dep user:permission
+
+
+##Filling database
+
+If it is first deploy you need fill database
+
+Import country and categories:
+
+```
+$ cd {{deploy_path}}/current
+$ php artisan import:mir24:init
+```
+
+Set "show"=true in table "categories".
+
+Import news and tags for the last month:
+
+```
+$ php artisan import:mir24 --period=43200
+```
+
+If count of news is equal zero, then set larger period or set "show"=true in table "categories".
