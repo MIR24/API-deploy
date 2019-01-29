@@ -39,7 +39,7 @@ In file *.env* we change:
 2. **APP_HTTP_SCHEME** (http - if ssl is not connected, https - if ssl is connected)
 3. **DB_DATABASE** , **DB_USERNAME** , **DB_PASSWORD** (corresponding mysql database settings for api database)
 4. **DB_MIR24_DATABASE** , **DB_MIR24_USERNAME** , **DB_MIR24_PASSWORD** (corresponding mysql database settings for mir24 database)
-
+5. **UPLOAD_FOLDER**(directory where save upload images and video)
 
 #Routine
 
