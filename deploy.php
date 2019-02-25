@@ -7,6 +7,7 @@ require 'recipe/smarttv_api/config.php';
 require 'recipe/smarttv_api/db.php';
 require 'recipe/smarttv_api/laravel.php';
 require 'recipe/smarttv_api/passport.php';
+require 'recipe/smarttv_api/composer.php';
 
 inventory('hosts.yml');
 
@@ -30,6 +31,7 @@ task('deploy', [
     'deploy:update_code',
     'deploy:shared',
     'deploy:vendors',
+    'composer:update',
     'smarttv_api:config',
 //    'smarttv_api:laravel',
     'smarttv_api:db:migrate',
