@@ -31,7 +31,7 @@ task('deploy', [
     'deploy:update_code',
     'deploy:shared',
     'deploy:vendors',
-    'composer:update',
+    'composer:install',
     'smarttv_api:config',
 //    'smarttv_api:laravel',
     'smarttv_api:db:migrate',
