@@ -8,6 +8,7 @@ require 'recipe/smarttv_api/db.php';
 require 'recipe/smarttv_api/laravel.php';
 require 'recipe/smarttv_api/passport.php';
 require 'recipe/smarttv_api/composer.php';
+require 'recipe/smarttv_api/import.php';
 
 inventory('hosts.yml');
 
