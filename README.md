@@ -95,3 +95,10 @@ $ php artisan import:mir24 --period=43200
 ```
 
 If count of news is equal zero, then set larger period or set "show"=true in table "categories".
+
+
+Import data from mirhd database for SmartTV API
+
+```
+dep import:smarttv test
+```
