@@ -18,9 +18,17 @@
 
 test-smarttv-api:
     <<: *smarttv-api
+    stage: test
     local: true
     env_example_file: '.env'
-    stage: test
-    http_user: www-data
+    http_user: user
     deploy_path: /home/user/Bostill/Mir/api-artisan
-    is_reset_fpm: false
+
+dev-smarttv-api:
+    <<: *smarttv-api
+    stage: develop
+    hostname: 195.128.157.246
+    user: deployer
+    deploy_path: ~/test
+    env_example_file: '.env'
+    #php_version: '7.2'
