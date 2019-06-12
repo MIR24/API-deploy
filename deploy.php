@@ -5,7 +5,6 @@ namespace Deployer;
 require 'recipe/common.php';
 require 'recipe/smarttv_api/config.php';
 require 'recipe/smarttv_api/db.php';
-require 'recipe/smarttv_api/laravel.php';
 require 'recipe/smarttv_api/passport.php';
 require 'recipe/smarttv_api/composer.php';
 require 'recipe/smarttv_api/import.php';
@@ -34,16 +33,23 @@ task('deploy', [
     'deploy:vendors',
     'composer:install',
     'smarttv_api:config',
-//    'smarttv_api:laravel',
     'smarttv_api:db:migrate',
-//    'api:passport',
-// TODO    'smarttv_api:db',
     'deploy:writable',
     'deploy:symlink',
     'deploy:unlock',
     'cleanup',
-    'success'
+    'php-fpm:restart',
+    'success',
 ]);
 
 // [Optional] If deploy fails automatically unlock.
 after('deploy:failed', 'deploy:unlock');
+
+// The user must have rights for restart service
+// /etc/sudoers: username ALL=NOPASSWD:/bin/systemctl restart php-fpm.service
+desc('Restart PHP-FPM service is set php_version');
+task('php-fpm:restart', function () {
+    if(has('php_version')){
+        run('sudo systemctl restart php{{php_version}}-fpm.service');
+    }
+});
