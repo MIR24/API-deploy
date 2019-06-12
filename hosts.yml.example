@@ -1,40 +1,26 @@
-.test-smarttv-api: &test-base
-    local: true
-    stage: test
-    env_example_file: .env
+.smarttv-api: &smarttv-api
     repository: git@github.com:MIR24/API.git
     branch: master
-    http_user: observat
-    keep_releases: 2
+    keep_releases: 3
     default_timeout: 1200
     composer_action: install
     writable_mode: chmod
     writable_chmod_mode: 777
     writable_dirs: ['storage', 'storage/logs', 'storage/api-docs']
-    shared_dirs: [public/uploaded]
+    shared_dirs: ['public/uploaded']
     shared_files: []
     #passport
     username: mirmobile
     email: test@test.com
     pass: 96570fd6a97dc9eaff5e6d751edc8906
+    #fpm
+    #php_version: '7.1'
 
-#test-smarttv-api-fpm:
-#    <<: *test-base
-#    deploy_path: /home/observat/work_git/mir24/api-deployer-fpm
-
-test-smarttv-api-artisan:
-    <<: *test-base
-    deploy_path: /home/observat/work_git/mir24/api-deployer-artisan
-
-
-#prod-smarttv-api:
-#    local: true
-#    stage: prod
-#    env_example_file: .env.prod
-#    deploy_path: /home/observat/work_git/mir24/api-deployer_prod
-#    repository: git@github.com:MIR24/API.git
-#    branch: master
-#    user: observat
-#    http_user: www-data
-#    keep_releases: 3
-#    default_timeout: 1200
+test-smarttv-api:
+    <<: *smarttv-api
+    local: true
+    env_example_file: '.env'
+    stage: test
+    http_user: www-data
+    deploy_path: /home/user/Bostill/Mir/api-artisan
+    is_reset_fpm: false
