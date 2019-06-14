@@ -40,3 +40,4 @@ dev-smarttv-api:
     php_version: '7.2'
 #    inject_env:
 #        APP_HTTP_SCHEME: http
+#        CACHE_ENABLED: 'false'
