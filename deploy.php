@@ -5,7 +5,6 @@ namespace Deployer;
 require 'recipe/laravel.php';
 require 'recipe/common.php';
 require 'recipe/smarttv_api/config.php';
-require 'recipe/smarttv_api/db.php';
 require 'recipe/smarttv_api/passport.php';
 require 'recipe/smarttv_api/import.php';
 
@@ -38,7 +37,7 @@ task('deploy', [
     'artisan:view:clear',
     'artisan:cache:clear',
     'artisan:config:cache',
-    'smarttv_api:db:migrate',
+    'artisan:migrate',
     'deploy:writable',
     'deploy:symlink',
     'deploy:unlock',
