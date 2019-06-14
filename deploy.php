@@ -7,7 +7,6 @@ require 'recipe/common.php';
 require 'recipe/smarttv_api/config.php';
 require 'recipe/smarttv_api/db.php';
 require 'recipe/smarttv_api/passport.php';
-require 'recipe/smarttv_api/composer.php';
 require 'recipe/smarttv_api/import.php';
 
 inventory('hosts.yml');
@@ -35,7 +34,6 @@ task('deploy', [
     'deploy:update_code',
     'deploy:shared',
     'deploy:vendors',
-    'composer:install',
     'smarttv_api:config',
     'artisan:view:clear',
     'artisan:cache:clear',
