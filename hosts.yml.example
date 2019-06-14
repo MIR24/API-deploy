@@ -28,7 +28,15 @@ dev-smarttv-api:
     <<: *smarttv-api
     stage: develop
     hostname: 195.128.157.246
-    user: deployer
-    deploy_path: ~/test
-    env_example_file: '.env'
-    #php_version: '7.2'
+    user: deploy
+    http_user: www-data
+    deploy_path: /home/www/dev19/api-dev
+    env_example_file: '/home/www/dev19/API-deploy/.env'
+    cleanup_use_sudo: true
+    forwardAgent: true
+    multiplexing: true
+    sshOptions:
+        StrictHostKeyChecking: no
+    php_version: '7.2'
+#    inject_env:
+#        APP_HTTP_SCHEME: http
