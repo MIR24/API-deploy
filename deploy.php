@@ -7,6 +7,7 @@ require 'recipe/common.php';
 require 'recipe/smarttv_api/config.php';
 require 'recipe/smarttv_api/passport.php';
 require 'recipe/smarttv_api/import.php';
+require 'recipe/onair/common.php';
 
 inventory('hosts.yml');
 
@@ -24,7 +25,7 @@ set('git_tty', true);
 
 
 // Tasks
-desc('Deploy your project');
+desc('Deploy api project');
 task('deploy', [
     'deploy:info',
     'deploy:prepare',
@@ -43,6 +44,27 @@ task('deploy', [
     'deploy:unlock',
     'cleanup',
     'php-fpm:restart',
+    'success',
+]);
+
+desc('Deploy onair project');
+task('deploy_onair', [
+    'deploy:prepare',
+    'deploy:lock',
+    'deploy:release',
+    'deploy:update_code',
+    'onair:vendor',
+    'onair:db',
+    'config:clone',
+    'onair:theme',
+    'onair:mirror',
+    'onair:images',
+    'deploy:shared',
+    'deploy:writable',
+    'deploy:symlink',
+    'deploy:unlock',
+    'cleanup',
+//   'php-fpm:restart',
     'success',
 ]);
 
