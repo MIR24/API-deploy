@@ -41,3 +41,43 @@ dev-smarttv-api:
 #    inject_env:
 #        APP_HTTP_SCHEME: http
 #        CACHE_ENABLED: 'false'
+
+dev-onair:
+    <<: *onair
+    stage: develop_onair
+    user: deploy
+    branch: develop
+    http_user: www-data
+    hostname: 195.128.157.247
+    config_path: /home/www/onair2/config/database.php
+    deploy_path: /home/www/onair2
+    public: true
+    images_path : themes/onair/assets/images
+    cleanup_use_sudo: true
+    forwardAgent: true
+    multiplexing: true
+    sshOptions:
+        StrictHostKeyChecking: no
+    dbhost: '192.168.250.2'
+    dbuser: 'onair'
+    dbpass: '???'
+    dbname: 'onair'
+    dump: 'dump.sql'
+    php_version: '7.1'
+
+local-onair:
+    <<: *onair
+    stage: test_onair
+    branch: develop
+    local: true
+    config_path: /home/user/Bostill/Mir/onair/database.php
+    http_user: user
+    deploy_path: /home/user/Bostill/Mir/onair
+    public: true
+    images_path : themes/onair/assets/images
+    dbhost: 'localhost'
+    dbuser: 'root'
+    dbpass: 'root'
+    dbname: 'onair'
+    dump: 'dump.sql'
+    php_version: '7.1
