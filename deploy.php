@@ -64,8 +64,8 @@ task('deploy_onair', [
     'deploy:symlink',
     'deploy:unlock',
     'cleanup',
-    'php-fpm:restart',
     'success',
+    'php-fpm:restart',
 ]);
 
 // [Optional] If deploy fails automatically unlock.
