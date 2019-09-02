@@ -27,7 +27,7 @@ set('git_tty', true);
 // Tasks
 desc('Deploy api project');
 task('deploy', [
-    'deploy:info',
+ //   'deploy:info',
     'deploy:prepare',
     'deploy:lock',
     'deploy:release',
@@ -55,7 +55,7 @@ task('deploy_onair', [
     'deploy:update_code',
     'onair:vendor',
     'onair:db',
-    'config:clone',
+    'onair:config:clone',
     'onair:theme',
     'onair:mirror',
     'onair:images',
@@ -64,7 +64,7 @@ task('deploy_onair', [
     'deploy:symlink',
     'deploy:unlock',
     'cleanup',
-//   'php-fpm:restart',
+    'php-fpm:restart',
     'success',
 ]);
 

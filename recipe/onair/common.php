@@ -20,7 +20,7 @@ task('onair:theme', function () {
 });
 
 desc('Propagate configuration onair file');
-task('config:clone', function () {
+task('onair:config:clone', function () {
     run('cp {{config_path}} {{release_path}}/config/database.php');
 });
 
