@@ -14,7 +14,7 @@
     email: test@test.com
     pass: 96570fd6a97dc9eaff5e6d751edc8906
     #fpm
-    #php_version: '7.1'
+    php_version: '7.1'
 
 test-smarttv-api:
     <<: *smarttv-api
@@ -23,24 +23,36 @@ test-smarttv-api:
     env_example_file: '.env'
     http_user: user
     deploy_path: /home/user/Bostill/Mir/api-artisan
+    config_path: /home/user/Bostill/Mir/onair/database.php
 
 dev-smarttv-api:
     <<: *smarttv-api
+    user: deploy
+    branch: develop
     stage: develop
     hostname: 195.128.157.246
-    user: deploy
     http_user: www-data
-    deploy_path: /home/www/dev19/api-dev
+    deploy_path: /home/www/dev19/
     env_example_file: '/home/www/dev19/API-deploy/.env'
     cleanup_use_sudo: true
     forwardAgent: true
     multiplexing: true
     sshOptions:
         StrictHostKeyChecking: no
-    php_version: '7.2'
+    php_version: '7.1'
 #    inject_env:
 #        APP_HTTP_SCHEME: http
-#        CACHE_ENABLED: 'false'
+
+.onair: &onair
+    repository: git@github.com:MIR24/mir-onair.git
+    keep_releases: 3
+    default_timeout: 1200
+    composer_action: install
+    writable_mode: chmod
+    writable_chmod_mode: 777
+    writable_dirs: ['storage', 'storage/logs']
+    shared_dirs: ['storage/app/uploads']
+    shared_files: []
 
 dev-onair:
     <<: *onair
@@ -60,9 +72,9 @@ dev-onair:
         StrictHostKeyChecking: no
     dbhost: '192.168.250.2'
     dbuser: 'onair'
-    dbpass: '???'
+    dbpass: '75ogh58o&^738r'
     dbname: 'onair'
-    dump: 'dump.sql'
+#    dump: 'dump.sql'
     php_version: '7.1'
 
 local-onair:
@@ -80,4 +92,4 @@ local-onair:
     dbpass: 'root'
     dbname: 'onair'
     dump: 'dump.sql'
-    php_version: '7.1
+    php_version: '7.2'
