@@ -56,6 +56,7 @@ task('deploy_onair', [
     'onair:vendor',
     'onair:db',
     'onair:config:clone',
+    'config:inject',
     'onair:theme',
     'onair:mirror',
     'onair:images',

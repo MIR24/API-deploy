@@ -22,6 +22,7 @@ task('onair:theme', function () {
 desc('Propagate configuration onair file');
 task('onair:config:clone', function () {
     run('cp {{config_path}} {{release_path}}/config/database.php');
+    run('cp {{env_path}} {{release_path}}/.env');
 });
 
 desc('Create mirror');
