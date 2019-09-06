@@ -1,6 +1,5 @@
 .smarttv-api: &smarttv-api
     repository: git@github.com:MIR24/API.git
-    branch: master
     keep_releases: 3
     default_timeout: 1200
     composer_action: install
@@ -28,7 +27,7 @@ test-smarttv-api:
 dev-smarttv-api:
     <<: *smarttv-api
     user: deploy
-    branch: develop
+    branch: master
     stage: develop
     hostname: 195.128.157.246
     http_user: www-data
@@ -58,13 +57,16 @@ dev-onair:
     <<: *onair
     stage: develop_onair
     user: deploy
-    branch: develop
+    branch: master
     http_user: www-data
     hostname: 195.128.157.247
     config_path: /home/www/onair2/config/database.php
+    env_path: /home/www/onair2/config/.env
     deploy_path: /home/www/onair2
     public: true
     images_path : themes/onair/assets/images
+    inject_env:
+        API_DOMAIN: 'https://api3.mir24.tv/'
     cleanup_use_sudo: true
     forwardAgent: true
     multiplexing: true
@@ -80,7 +82,7 @@ dev-onair:
 local-onair:
     <<: *onair
     stage: test_onair
-    branch: develop
+    branch: master
     local: true
     config_path: /home/user/Bostill/Mir/onair/database.php
     http_user: user
