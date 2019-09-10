@@ -59,6 +59,7 @@ task('deploy_onair', [
     'config:inject',
     'onair:theme',
     'onair:mirror',
+    'onair:up',
     'onair:images',
     'deploy:shared',
     'deploy:writable',

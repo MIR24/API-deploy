@@ -32,6 +32,13 @@ task('onair:mirror', function () {
     }
 });
 
+desc('Create update');
+task('onair:up', function () {
+    if (has('public')) {
+        run('cd {{release_path}} && {{bin/php}} artisan october:up');
+    }
+});
+
 desc('Add simlinks ');
 task('onair:images', function () {
     if (has('public')) {
